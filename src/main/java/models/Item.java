@@ -16,6 +16,13 @@ public class Item {
         this.discount = discount;
     }
 
+    public Item(String name, BigDecimal price, boolean onSale) {
+        this.name = name;
+        this.price = price;
+        this.onSale = onSale;
+        this.discount = BigDecimal.ZERO;
+    }
+
     public String getName() {
         return name;
     }
@@ -47,4 +54,5 @@ public class Item {
     public void setDiscount(BigDecimal discount) {
         this.discount = discount;
     }
+
 }

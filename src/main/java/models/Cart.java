@@ -8,11 +8,6 @@ import java.util.stream.Collectors;
 public class Cart {
     private List<LineItem> items = new ArrayList<>();
 
-    public BigDecimal getTotalPrice() {
-        return items.stream()
-                .map(LineItem::getSubTotal)
-                .reduce(new BigDecimal(0), BigDecimal::add);
-    }
 
     public void addItemToCart(Item item) {
         items.add(new LineItem(item));
@@ -51,24 +46,4 @@ public class Cart {
                 .collect(Collectors.toList());
     }
 
-    public List<String> itemizedList() {
-        return items.stream()
-                .map(Cart::itemizedFormat)
-                .collect(Collectors.toList());
-    }
-
-    public List<String> onSaleItems() {
-        return items.stream()
-                .filter((item) -> item.getItem().isOnSale())
-                .map(Cart::itemizedFormat)
-                .collect(Collectors.toList());
-    }
-
-    private static String itemizedFormat(LineItem item) {
-        NumberFormat formatter = NumberFormat.getCurrencyInstance(Locale.getDefault());
-        return String.format("%s x%d - %s",
-                item.getItem().getName(),
-                item.getQuantity(),
-                formatter.format(item.getSubTotal()));
-    }
 }

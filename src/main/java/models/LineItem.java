@@ -6,6 +6,7 @@ import java.math.BigInteger;
 public class LineItem {
     private Item item;
     private int quantity;
+    private BigDecimal discountedPrice;
 
     public LineItem(Item item) {
         this.item = item;
@@ -33,7 +34,11 @@ public class LineItem {
         this.quantity = quantity;
     }
 
-    public BigDecimal getSubTotal() {
-        return this.item.getPrice().multiply(new BigDecimal(this.quantity));
+    public BigDecimal getDiscountedPrice() {
+        return discountedPrice;
+    }
+
+    public void setDiscountedPrice(float discountedPrice) {
+        this.discountedPrice = item.getPrice().multiply(item.getDiscount());
     }
 }
